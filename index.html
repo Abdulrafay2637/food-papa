@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodpanda Style Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      /*
+      .btn-pink {
+    background-color: #ff2b85;
+    color: black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+}
+.text-pink {
+    color: #ff2b85;
+}
+    */
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Navbar Styles */
+        .Navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: #d70f64; /* Foodpanda Pink */
+            color: white;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        /* Signup Button */
+        .signup-btn {
+            background-color: white;
+            color: #d70f64;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Modal Magic (Pure CSS) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+        
+        /* Close Button */
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .submit-btn {
+            background-color: #d70f64;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* The Magic - Show Modal When Checkbox is Checked */
+        #modal-toggle {
+            display: none;
+        }
+        
+        #modal-toggle:checked ~ .modal {
+            display: block;
+        }
+
+
+
+
+
+
+
+        
+        .burger-box {
+            background: #e0e0e0;
+            margin: 0; 
+            padding: 50px 0; 
+            width: 100%; 
+        }
+
+        /* CONTENT CONTAINER (Centered Content) */
+        .content-container {
+            max-width: 1200px; /* Maximum Content Width */
+            margin: 0 auto; /* Center Horizontally */
+            display: flex;
+            gap: 50px;
+            padding: 0 20px; /* Left-Right Padding */
+            align-items: center;
+        }
+
+        /* TEXT SECTION (Left Side) */
+        .text-section {
+            flex: 1;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+        }
+        #changingText {
+            font-size: 32px; /* Larger Text */
+            font-weight: bold;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* BURGER IMAGE (Right Side - Now Huge!) */
+        .burger-img {
+            flex: 1;
+        }
+        .burger-img img {
+            width: 100%;
+            max-width: 600px; /* Very Large Image */
+            border-radius: 15px;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            #changingText { font-size: 26px; }
+        }
+
+/* second navbar */
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-btn {
+            background: white;
+            border: 1px solid #ff2b85;
+            color: #ff2b85;
+        }
+        .signup-btn {
+            background: #ff2b85;
+            color: white;
+            border: none;
+        }
+        .cart-icon {
+            font-size: 20px;
+            color: #ff2b85;
+        }
+
+        /* Modal System (Pure CSS) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .modal:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff2b85;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .form-footer a {
+            color: #ff2b85;
+            text-decoration: none;
+        }
+
+        /* Prevent URL hash changes */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+
+        /* HAN MERI JAN*/
+         /* New Image+Box Section */
+         .feature-section {
+            display: flex;
+            height: 70vh;
+            margin-top: 20px;
+        }
+        .image-part {
+            flex: 1;
+            background: url('https://tse4.mm.bing.net/th?id=OIP.iIMXux_2m2u-fC8NA_nkPQHaE8&pid=Api&P=0&h=220') center/cover;
+        }
+        .content-part {
+            flex: 1;
+            padding: 40px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .feature-section {
+                flex-direction: column;
+                height: auto;
+            }
+            .image-part {
+                height: 300px;
+            }
+        }
+
+
+
+
+        /* Main Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+            color: black;
+        }
+        
+        /* Download Section */
+        .download-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #000000;
+            color: #e0e0e0
+        }
+        
+        /* Pink Header */
+        h1 {
+            color: #ff2b85;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        /* Subheader */
+        h2 {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+        
+        /* Description Text */
+        .description {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        /* App Buttons */
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        
+        .app-btn {
+            background: red;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: left;
+            width: 180px;
+            transition: transform 0.3s;
+        }
+        
+        .app-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .app-btn small {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .app-btn strong {
+            font-size: 20px;
+        }
+
+
+
+        
+    </style>
+</head>
+<body>
+ <!-- Navbar -->
+ <nav class="Navbar">
+    <div class="logo">
+        <span>foodpanda</span>
+    </div>
+    
+    <!-- This label acts as our button -->
+    <button onclick="handlesignup()" for="modal-toggle" class="signup-btn">Sign Up</button>
+</nav>
+
+
+
+<!-- Modal -->
+<div class="modal">
+    <div class="modal-content">
+        
+        <h2>Create Account</h2>
+        <form>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input id="Email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input id="Password"  placeholder="Create password" required>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+<!--
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.O9Rl0RvQvk9CvTSM95IzwAAAAA&pid=Api&P=0&h=220" alt="Logo" 
+            style="height: 40px; margin-right: 10px;">Foodpanda
+        </a>
+
+        <div >
+            <span  style="font-size: 18px;  font-weight: 600; color: #000000;">
+                Do you need a business account?
+            </span>
+        </div>
+        
+        
+        <button >
+            Sign Up
+        </button>
+    </div>
+</nav>
+
+
+<div class="modal fade" id="signupModal"  >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title text-pink">Create Account</h5>
+                <button type="button" class="btn-close"  ></button>
+            </div>
+            
+            
+          <div class="modal-body">
+                
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Your name">
+                </div>
+                
+                
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input id="Email" type="email" class="form-control" placeholder="email@example.com">
+                </div>
+                
+                
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input id="Password" type="password" class="form-control" placeholder="••••••••">
+                </div>
+                
+                
+                <button class="btn btn-pink w-100 py-2" onclick="handlesignup()">
+                    Sign Up
+                </button>
+                
+                
+                <p>
+                    Already have an account? 
+                    <a href="#" class="text-pink text-decoration-none">Login</a>
+                </p>
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+-->
+<!-- Navbar -->
+<nav class="navbar">
+    <div>Start from here</div>
+    <div class="nav-right">
+        <a href="#cartModal" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#loginModal" class="btn login-btn">Login</a>
+        <a href="#signupModal" class="btn signup-btn">Sign Up</a>
+    </div>
+</nav>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-btn">&times;</a>
+        <h2 style="color: #ff2b85; margin-top: 0;">Login</h2>
+        <form>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <div class="form-footer">
+            Don't have an account? <a href="#signupModal">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-btn">&times;</a>
+        <h2 style="color: #ff2b85; margin-top: 0;">Sign Up</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+        <div class="form-footer">
+            Already have an account? <a href="#loginModal">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <a href="#" class="close-btn">&times;</a>
+        <h2 style="color: #ff2b85; margin-top: 0;">Your Cart</h2>
+        <div style="text-align: center; padding: 20px;">
+            <i class="fas fa-shopping-cart" style="font-size: 50px; color: #ddd;"></i>
+            <p>Your cart is empty</p>
+            <a href="#" class="btn signup-btn" style="display: inline-block; margin-top: 15px;">Start Shopping</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- FULL-WIDTH BURGER BOX -->
+
+
+<div class="burger-box">
+    <h1>Welcome Dear</h1>
+    <div class="content-container">
+        <!-- Left: Text Animation -->
+        <div class="text-section">
+            <div id="changingText"></div>
+        </div>
+        
+        <!-- Right: Giant Burger Image -->
+        <div class="burger-img">
+            <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg" alt="Burger">
+        </div>
+    </div>
+</div>
+
+<script>
+    // Same Animation Script
+    const messages = [
+        "special anday wala burger",
+        "available 24/7",
+        "enjoy meal on wheel at your doorstep",
+        "your compliment is our reward"
+    ];
+    
+    let msgIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const element = document.getElementById("changingText");
+    
+    function typeWriter() {
+        const currentMsg = messages[msgIndex];
+        
+        if (isDeleting) {
+            element.textContent = currentMsg.substring(0, charIndex-1);
+            charIndex--;
+        } else {
+            element.textContent = currentMsg.substring(0, charIndex+1);
+            charIndex++;
+        }
+        
+        if (!isDeleting && charIndex === currentMsg.length) {
+            isDeleting = true;
+            setTimeout(typeWriter, 2000);
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            msgIndex = (msgIndex + 1) % messages.length;
+            setTimeout(typeWriter, 500);
+        } else {
+            setTimeout(typeWriter, isDeleting ? 30 : 70); /* Faster Animation */
+        }
+    }
+    
+    typeWriter();
+</script>
+
+<h1 style="color: #000000;">We’re here to help you live life the panda way.</h1>
+
+
+<div class="feature-section">
+    <!-- Left Image -->
+    <div class="image-part"></div>
+    
+    <!-- Right Content -->
+    <div class="content-part">
+        <h2>Our Services</h2>
+        <p>Get your restaurant online and start receiving orders today!</p>
+        <button style="background:#ff2b85; color:white; border:none; padding:12px 25px; margin-top:15px; border-radius:4px;">
+            Get Started
+        </button>
+    </div>
+</div>
+<br>
+<hr>
+<div class="download-container">
+    <!-- Header -->
+    <h1>Put us in your pocket</h1>
+    <h2>Download the food and groceries you love</h2>
+    
+    <!-- Description -->
+    <p class="description">
+        It's all at your fingertips – the restaurants and shops you love. 
+        Find the right food and groceries to suit your mood, and make the 
+        first bite last. Go ahead, download us.
+    </p>
+    
+    <!-- App Download Buttons -->
+    <div class="app-buttons">
+        <a href="#" class="app-btn">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+        </a>
+        
+        <a href="#" class="app-btn">
+            <small>GET IT ON</small>
+            <strong>Google Play</strong>
+        </a>
+        
+        <a href="#" class="app-btn">
+            <small>DOWNLOAD ON</small>
+            <strong>AppGallery</strong>
+        </a>
+    </div>
+</div>
+<hr>
+
+<div style="display: flex; align-items: center; gap: 30px;">
+    <!-- Left Side (Text) -->
+    <div style="margin-left: 20%; padding: 20px;">
+        <h1>Feed your team.</h1>
+        <p>Delivering meals on wheels.</p>
+        <button>Learn more</button>
+    </div>
+    <!-- Right Side (Image) -->
+    <div style="flex: 1; margin-left: 10%; ">
+        <img src="https://tse4.mm.bing.net/th?id=OIP.WgxodMa1VM0PwycbVGAflQHaE8&pid=Api&P=0&h=220" alt="FoodDelivery" width="500px" height="400px">
+    </div>
+</div>
+<hr>
+<div style="text-align: center; padding: 30px 0; background-color: #f8f9fa; margin-top: 40px; border-top: 1px solid #e0e0e0;">
+    <h2 style="color: #2c3e50; font-size: 24px; margin-bottom: 15px;">food point</h2>
+    
+    <!-- Instagram Icon with Link -->
+    <a href="https://www.instagram.com/abdulrafay2637/" target="_blank" style="display: inline-block; margin-bottom: 15px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#E1306C"/>
+            <path d="M17 5H7C5.89543 5 5 5.89543 5 7V17C5 18.1046 5.89543 19 7 19H17C18.1046 19 19 18.1046 19 17V7C19 5.89543 18.1046 5 17 5Z" stroke="#E1306C" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="#E1306C"/>
+        </svg>
+    </a>
+    
+    <p style="color: #7f8c8d; font-size: 14px; margin: 0;">© Copyright All Rights Reserved by Abdul Rafay</p>
+</div>
+
+
+
+
+
+ <script type="module" src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
+
+
+
